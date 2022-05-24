@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Color-Blocks</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
     <script src="./app.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <!-- This Div is for options -->
-        <div class="options">
-            <div class="color">
-                <div class="main">
-                    <!-- Main Color -->
-                    <input type="color" value="#000000" id="mcolor">
-                    <span>
-                        Main Color
-                    </span>
-                </div>
-                <div class="bgcolor">
-                    <!-- BG Color -->
-                    <input type="color" value="#ffffff" id="bgcolor">
-                    <span>
-                        Background Color
-                    </span>
-                </div>
-            </div>
-            <div class="grid-op">
-                
-            </div>
+      <!-- This Div is for options -->
+      <div class="options">
+        <div class="color">
+          <div class="main">
+            <!-- Main Color -->
+            <input type="color" value="#000000" id="mcolor" />
+            <span> Main Color </span>
+          </div>
+          <div class="bgcolor">
+            <!-- BG Color -->
+            <input type="color" value="#ffffff" id="bgcolor" />
+            <span> Background Color </span>
+          </div>
         </div>
-        <!-- This Div is for the Grid -->
-        <div>
-
+        <div class="grid-op">
+          <button id="eraser">Eraser</button>
+          <!-- Implementing Range Slider -->
+          <div class="slidecontainer">
+            <input
+              type="range"
+              min="1"
+              max="100"
+              value="50"
+              class="slider"
+              id="myRange"
+            />
+          </div>
+          
         </div>
+      </div>
+      <!-- This Div is for the Grid -->
+      <div></div>
     </main>
-</body>
+  </body>
 </html>

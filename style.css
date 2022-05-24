@@ -32,3 +32,33 @@ div {
 input, span {
     margin-right: 3px;
 }
+
+.grid-op {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#eraser {
+    color: #3A3845;
+    
+}
+
+.slidecontainer {
+    width: 100%;
+  }
+  
+  .slider {
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    transition: opacity .2s;
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  
