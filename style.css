@@ -26,9 +26,7 @@ main {
     background-color: #383838;
 }
 
-div {
-    margin-bottom: 5px;
-}
+
 input, span {
     margin-right: 3px;
 }
@@ -39,9 +37,12 @@ input, span {
     align-items: center;
 }
 
-#eraser {
-    color: #3A3845;
-    
+.cusColor {
+    color: #3A3845;   
+}
+
+button {
+    margin-bottom: 3px;
 }
 
 .slidecontainer {
@@ -61,4 +62,38 @@ input, span {
   .slider:hover {
     opacity: 1; /* Fully shown on mouse-over */
   }
+
+  .gridWrapper {
+    height: 85vh;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(37, 37, 37);
+  }
   
+  .gridContainer {
+    background-color: rgb(255, 255, 255);
+    display: grid;
+    width: 75vh;
+    aspect-ratio: 1/1;
+  }
+
+  .cell {
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    user-select: none;
+  }
+  
+  .border {
+    border: none;
+  }
+
+  .colorOptions {
+    align-items: center;
+  }
+
+  .bt {
+      margin-bottom: 5px;
+  }
