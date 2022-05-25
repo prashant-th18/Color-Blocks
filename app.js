@@ -1,4 +1,4 @@
-let gridSize = 4; // Initial Size of the Grid
+let gridSize = 16; // Initial Size of the Grid
 let bgColor = "#ffffff";
 let ink = "#000000";
 let erase = false,
