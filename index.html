@@ -1,59 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Color-Blocks</title>
-    <link rel="stylesheet" href="./style.css" />
-    <script src="./app.js" defer></script>
-  </head>
-  <body>
-    <main>
-      <!-- This Div is for options -->
-      <div class="options">
-        <div class="color">
-          <div class="main bt">
-            <!-- Main Color -->
-            <input type="color" value="#000000" id="mcolor" />
-            <span> Main Color </span>
-          </div>
-          <div class="bgcolor bt">
-            <!-- BG Color -->
-            <input type="color" value="#ffffff" id="bgcolor" />
-            <span> Background Color </span>
-          </div>
-        </div>
-        <div class="grid-op">
-          <button class="cusColor eraser">Eraser</button>
-          <!-- Implementing Range Slider -->
-          <div class="slidecontainer">
-            <input
-              type="range"
-              min="4"
-              max="32"
-              value="16"
-              class="slider"
-              id="myRange"
-            />
-          </div>
-          <div class="bt">
-            Grid Size - 
-            <span id="size">16 * 16</span>
-          </div>
-          <button class="cusColor sGrid">
-            Hide Grid
-          </button>
-          <button class="cusColor clear">
-            Clear
-          </button>
-        </div>
-      </div>
-      <!-- This Div is for the Grid -->
-      <div class="gridWrapper">
-        <div class="gridContainer" draggable="false">
-        </div>
-      </div>
-    </main>
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Day | For My Favorite Person</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="progress-sidebar">
+        <div class="day-node" id="node-7" onclick="if(DEBUG_MODE) showDay(7)">7</div>
+        <div class="day-node" id="node-8" onclick="if(DEBUG_MODE) showDay(8)">8</div>
+        <div class="day-node" id="node-9" onclick="if(DEBUG_MODE) showDay(9)">9</div>
+        <div class="day-node" id="node-10" onclick="if(DEBUG_MODE) showDay(10)">10</div>
+        <div class="day-node" id="node-11" onclick="if(DEBUG_MODE) showDay(11)">11</div>
+        <div class="day-node" id="node-12" onclick="if(DEBUG_MODE) showDay(12)">12</div>
+        <div class="day-node" id="node-13" onclick="if(DEBUG_MODE) showDay(13)">13</div>
+        <div class="day-node" id="node-14" onclick="if(DEBUG_MODE) showDay(14)">14</div>
+    </div>
+
+    <div id="main-wrapper">
+        <section id="section-6" class="day-section hidden">
+            <div id="waiting-container" class="flex-center-column">
+                <div class="teaser-content">
+                    <h1 class="romantic-title pulse">Something Beautiful is Blooming...</h1>
+                    <div class="timer-box">
+                        <p>The first surprise reveals itself on</p>
+                        <div class="date-highlight">FEBRUARY 7th</div>
+                    </div>
+                    <p class="sub-text">Prepare your heart, Meri Pillu. ❤️</p>
+                </div>
+            </div>
+        </section>
+        <section id="section-7" class="day-section">
+            <div id="garden-container">
+                <div id="ui-overlay">
+                    <h1 id="main-title">Rose Day</h1>
+                    <p id="instruction">Click anywhere to plant a rose of love...</p>
+                    <p id="counter">Roses planted: <span id="count">0</span> / 10</p>
+                </div>
+
+                <div id="message-card" class="hidden">
+                    <h2>Happy Rose Day, Meri Pillu! 🌹</h2>
+                    <p>"Tum meri life in roses ki tarah hi sundar bnate ho meri bhishma. Like these roses, my love for
+                        you
+                        grows
+                        more vibrant every day."</p>
+                    <button id="next-day-7" onclick="handleDayComplete(8)">Continue to Feb 8</button>
+                </div>
+
+                <div class="photo-sidebar left-side hidden" id="left-photos">
+                    <div class="polaroid">
+                        <img src="image1.jpg" alt="Memory 1">
+                        <div class="caption">My Pillu ❤️</div>
+                    </div>
+                    <div class="polaroid">
+                        <img src="image2.jpg" alt="Memory 2">
+                        <div class="caption">That Smile...</div>
+                    </div>
+                </div>
+
+                <div class="photo-sidebar right-side hidden" id="right-photos">
+                    <div class="polaroid">
+                        <img src="image3.jpg" alt="Memory 3">
+                        <div class="caption">Awww, meli pliyatma</div>
+                    </div>
+                    <div class="polaroid">
+                        <img src="image4.jpg" alt="Memory 4">
+                        <div class="caption">Always You!!!</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="section-8" class="day-section hidden">
+            <div id="propose-container">
+                <h1 class="romantic-title">Will you be my Valentine?</h1>
+                <div class="btn-group">
+                    <button id="yes-btn">YES! ❤️</button>
+                    <button id="no-btn">No</button>
+                </div>
+                <div id="propose-success" class="hidden glass-card">
+                    <h2>I knew it! 🥰</h2>
+                    <p>You're stuck with me forever now. See you tomorrow for a sweet treat!</p>
+                    <button onclick="handleDayComplete(9)">See you on Feb 9</button>
+                </div>
+            </div>
+        </section>
+        <section id="section-9" class="day-section hidden">
+            <div id="chocolate-container" class="flex-center-column">
+                <h1 class="romantic-title">A Sweet Memory Match 🍫</h1>
+                <p class="instruction">Match the chocolates to reveal our sweetest moments!</p>
+
+                <div id="chocolate-grid">
+                </div>
+
+                <div id="chocolate-success" class="hidden glass-card">
+                    <h2>You're the Sweetest! 🥰</h2>
+                    <p>Every moment with you is more delicious than the finest chocolate. I love you more than all the
+                        cocoa in the world!</p>
+                    <button id="next-day-9" onclick="handleDayComplete(10)">Continue to Teddy Day</button>
+                </div>
+            </div>
+        </section>
+        <section id="section-10" class="day-section hidden">
+            <div id="teddy-squeeze-container">
+                <h1 class="romantic-title">A Big Teddy Hug! 🧸</h1>
+                <p class="instruction">Click and HOLD the teddy to give him a tight squeeze!</p>
+
+                <div id="hug-workshop">
+                    <div id="teddy-stage-squeeze">
+                        <img src="https://pngimg.com/d/teddy_bear_PNG63.png" id="hug-teddy" alt="Teddy Bear">
+                        <div id="hug-heart-container"></div>
+                    </div>
+
+                    <div id="meter-container">
+                        <div id="hug-meter-label">HUG STRENGTH</div>
+                        <div class="meter-bg">
+                            <div id="hug-meter-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="teddy-success" class="hidden glass-card">
+                    <h2>BEAR-Y MUCH LOVE! ❤️</h2>
+                    <p>You've squeezed him just right! In my life, I also have a hude teddy, and you know who's that?
+                        It's YOUUUUUU!!!!! I love you shooo shoooo muchhhh!!!!</p>
+                    <button class="continue-btn" onclick="handleDayComplete(11)">Continue to Promise Day</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <script src="script.js"></script>
+    <script src="propose.js"></script>
+</body>
+
 </html>

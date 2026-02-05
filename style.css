@@ -1,99 +1,683 @@
 * {
     margin: 0;
     padding: 0;
-    color: white;
     box-sizing: border-box;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: black;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8fafc;
+    /* Start with a clean, neutral grey-white */
+    overflow: hidden;
+    /* No scrolling on desktop */
+    transition: background 2s ease;
 }
 
-main {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+#waiting-container {
     height: 100vh;
+    background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
+    text-align: center;
 }
 
-.options {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 5px;
-    background-color: #383838;
+.pulse {
+    animation: softPulse 3s infinite ease-in-out;
 }
 
-
-input, span {
-    margin-right: 3px;
+@keyframes softPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
 }
 
-.grid-op {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.timer-box {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    margin: 20px 0;
 }
 
-.cusColor {
-    color: #3A3845;   
+.date-highlight {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff4d6d;
+    letter-spacing: 3px;
+    margin-top: 10px;
 }
 
-button {
-    margin-bottom: 3px;
+.sub-text {
+    font-style: italic;
+    color: #ff758f;
+    margin-top: 20px;
 }
 
-.slidecontainer {
-    width: 100%;
-  }
-  
-  .slider {
-    width: 100%; /* Full-width */
-    height: 25px; /* Specified height */
-    background: #d3d3d3; /* Grey background */
-    outline: none; /* Remove outline */
-    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-    transition: opacity .2s;
-  }
-  
-  /* Mouse-over effects */
-  .slider:hover {
-    opacity: 1; /* Fully shown on mouse-over */
-  }
-
-  .gridWrapper {
-    height: 85vh;
-    aspect-ratio: 1/1;
-    border-radius: 10px;
+#garden-container {
+    width: 100vw;
+    height: 100vh;
+    cursor: crosshair;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(37, 37, 37);
-  }
-  
-  .gridContainer {
-    background-color: rgb(255, 255, 255);
-    display: grid;
-    width: 75vh;
-    aspect-ratio: 1/1;
-  }
+}
 
-  .cell {
-    border-top: 1px solid black;
-    border-right: 1px solid black;
+#ui-overlay {
+    position: absolute;
+    top: 50px;
+    text-align: center;
+    pointer-events: none;
+    /* Allows clicking "through" the text */
+    z-index: 10;
+}
+
+#main-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: #ff4d6d;
+    margin-bottom: 10px;
+}
+
+#instruction {
+    color: #64748b;
+    font-size: 1.2rem;
+}
+
+/* The Rose Emoji Styling */
+.rose {
+    position: absolute;
+    pointer-events: none;
+    /* Keeps the click target on the garden */
     user-select: none;
-  }
-  
-  .border {
+    filter: drop-shadow(0 5px 15px rgba(255, 77, 109, 0.3));
+    /* Adds a soft pink glow */
+    animation: bloomStraight 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes bloomStraight {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        /* The final scale is handled by the JS inline style, 
+           so we just ensure it animates to its full opacity */
+        opacity: 1;
+    }
+}
+
+/* The Upgraded Romantic Card */
+#message-card {
+    background: rgba(255, 255, 255, 0.7);
+    /* Semi-transparent */
+    backdrop-filter: blur(15px);
+    /* The "Glass" effect */
+    -webkit-backdrop-filter: blur(15px);
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 25px 50px -12px rgba(255, 77, 109, 0.25);
+    text-align: center;
+    z-index: 100;
+    max-width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    /* Soft edge */
+    transform: translateY(30px) scale(0.9);
+    opacity: 0;
+    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Bouncy entrance */
+}
+
+#message-card.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+#message-card h2 {
+    font-family: 'Dancing Script', cursive;
+    color: #ff4d6d;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+#message-card p {
+    font-family: 'Poppins', sans-serif;
+    color: #4a5568;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* The Romantic Button */
+#message-card button {
+    background: linear-gradient(135deg, #ff4d6d 0%, #ff758f 100%);
+    color: white;
+    padding: 15px 40px;
     border: none;
-  }
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+    transition: all 0.3s ease;
+}
 
-  .colorOptions {
+#message-card button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(255, 77, 109, 0.4);
+    letter-spacing: 3px;
+}
+
+.hidden {
+    display: none;
+}
+
+h2 {
+    font-family: 'Dancing Script', cursive;
+    color: #ff4d6d;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+body {
+    /* Animated Gradient Background */
+    background: linear-gradient(45deg, #fff1f2, #ffe4e6, #fecdd3);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' style='font-size:24px'><text y='20'>✨</text></svg>"), auto;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Floating Compliment Animation */
+.compliment {
+    position: absolute;
+    color: #fb7185;
+    font-style: italic;
+    font-size: 0.9rem;
+    pointer-events: none;
+    animation: floatUp 2s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+}
+
+#main-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 5rem;
+    /* Bigger and bolder */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Container for the falling petals */
+#petal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Crucial: so she can still click to plant roses */
+    z-index: 1;
+    /* Behind the UI, but can be above the planted roses */
+}
+
+.petal {
+    position: absolute;
+    background-color: #ff4d6d;
+    border-radius: 150% 0 150% 0;
+    /* Petal shape */
+    opacity: 0.7;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+/* The falling animation */
+@keyframes fall {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+    }
+
+    100% {
+        top: 110%;
+        transform: translateX(100px) rotate(360deg);
+    }
+}
+
+/* Sidebar positioning */
+.photo-sidebar {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    z-index: 5;
+    transition: opacity 1.5s ease-in-out;
+}
+
+/* This class will be removed via JS */
+.hidden {
+    display: none;
+}
+
+/* This class will be added via JS */
+.visible {
+    display: flex;
+}
+
+.left-side {
+    left: 10%;
+}
+
+.right-side {
+    right: 10%;
+}
+
+/* The Polaroid Frame */
+.polaroid {
+    background: white;
+    padding: 15px 15px 30px 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid #eee;
+    width: 220px;
+    /* Perfect desktop size */
+    transition: transform 0.5s ease;
+}
+
+.polaroid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    /* Keeps faces from looking stretched */
+    border: 1px solid #f0f0f0;
+}
+
+.polaroid .caption {
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    margin-top: 15px;
+    color: #444;
+    font-size: 1.2rem;
+}
+
+/* Scattering the photos slightly */
+.left-side .polaroid:nth-child(1) {
+    transform: rotate(-5deg);
+}
+
+.left-side .polaroid:nth-child(2) {
+    transform: rotate(3deg);
+}
+
+.right-side .polaroid:nth-child(1) {
+    transform: rotate(4deg);
+}
+
+.right-side .polaroid:nth-child(2) {
+    transform: rotate(-6deg);
+}
+
+/* Hover effect */
+.polaroid:hover {
+    transform: scale(1.1) rotate(0deg) !important;
+    z-index: 50;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.day-section.hidden {
+    display: none;
+}
+
+
+
+#propose-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-  }
+    background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
+}
 
-  .bt {
-      margin-bottom: 5px;
-  }
+.romantic-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 5rem;
+    color: #ff4d6d;
+    margin-bottom: 50px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 40px;
+    position: relative;
+    /* Essential for z-index to work */
+    z-index: 1000;
+    /* Higher than cry-photos (which are 0) */
+}
+
+#yes-btn {
+    background: #ff4d6d;
+    color: white;
+    padding: 20px 60px;
+    font-size: 1.5rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1001;
+}
+
+#no-btn {
+    background: #64748b;
+    color: white;
+    padding: 20px 60px;
+    font-size: 1.5rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    /* Ensure it stays above everything when moving */
+}
+
+/* Glass card style for success message */
+.glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Add to style.css */
+#progress-sidebar {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 200;
+}
+
+.day-node {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #ccc;
+    border: 2px solid #eee;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.day-node.completed {
+    background: #ff4d6d;
+    color: white;
+    border-color: #ff4d6d;
+}
+
+.day-node.active {
+    border-color: #ff4d6d;
+    color: #ff4d6d;
+    box-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+}
+
+.day-node.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Add to style.css */
+.cry-photo {
+    position: fixed;
+    width: 80px;
+    height: auto;
+    opacity: 0.8;
+    z-index: 0;
+    /* This keeps them in the background layer */
+    pointer-events: none;
+    animation: fadeAndIn 0.5s ease-out;
+}
+
+@keyframes fadeAndIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+/* Chocolate Day Specifics */
+#chocolate-container {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#chocolate-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    /* 4 columns of 150px each */
+    gap: 20px;
+    margin: 30px auto;
+    perspective: 1000px;
+    /* Crucial for 3D flip */
+}
+
+.chocolate-card {
+    width: 150px;
+    height: 180px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.chocolate-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-front {
+    background: linear-gradient(135deg, #4e2a00 0%, #2b1600 100%);
+    border: 3px solid #633900;
+    color: #ffd700;
+    font-size: 3rem;
+}
+
+.card-back {
+    background: white;
+    transform: rotateY(180deg);
+    overflow: hidden;
+    border: 4px solid #fff;
+}
+
+.card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Teddy Day - Option 2 Styles */
+#teddy-squeeze-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#teddy-stage-squeeze {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Give it vertical breathing room */
+    display: flex;
+    justify-content: center;
+    z-index: 1; /* Lowest container layer */
+    align-items: center;
+    overflow: visible; /* Allows the bear to grow outside the circle */
+}
+
+#hug-teddy {
+    width: 250px; /* Base size */
+    height: auto;
+    z-index: 5;
+    /* Remove transition or set it very low so it feels reactive to the meter */
+    transition: transform 0.05s linear; 
+    will-change: transform; /* Engineering tip: helps browser optimize scaling */
+}
+
+/* The visual squeeze effect */
+#teddy-stage-squeeze.squeezing #hug-teddy {
+    transform: scale(1.1);
+    /* Expands like it's being hugged */
+}
+
+/* Ensure the meter stays on top of the giant bear */
+#meter-container {
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+#hug-meter-label {
+    font-family: 'Poppins', sans-serif;
+    color: #ff4d6d;
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.meter-bg {
+    width: 100%;
+    height: 15px;
+    background: #ffe5ec;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ffccd5;
+}
+
+#hug-meter-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff758f, #ff4d6d);
+    transition: width 0.1s linear;
+}
+
+/* Floating hearts for the hug */
+.hug-heart {
+    position: absolute;
+    font-size: 20px;
+    pointer-events: none;
+    animation: heartFly 1.5s ease-out forwards;
+    z-index: 10;
+}
+
+@keyframes heartFly {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-150px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.mega-scale {
+    /* Scale to 3x its size (or whatever fits your screen best) */
+    transform: scale(2.8); 
+}
+
+#teddy-success {
+    position: fixed; /* Takes it out of the normal flow */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9); /* Centered and slightly smaller for entrance */
+    z-index: 9999; /* Higher than any other element on the page */
+    width: 90%;
+    max-width: 450px;
+    opacity: 0;
+    pointer-events: none; /* Can't click it while hidden */
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#teddy-success.show {
+    opacity: 1;
+    pointer-events: auto; /* Re-enable buttons when visible */
+    transform: translate(-50%, -50%) scale(1);
+}
