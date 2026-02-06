@@ -4,12 +4,12 @@ const HUG_GOAL = 100;
 
 const DAILY_MEMORIES = {
     7: { // Rose Day
-        left: [{src: 'image1.jpg', cap: 'My Pillu ❤️'}, {src: 'image2.jpg', cap: 'That Smile...'}],
-        right: [{src: 'image3.jpg', cap: 'Awww ❤️'}, {src: 'image4.jpg', cap: 'Always You!'}]
+        left: [{ src: 'image1.jpg', cap: 'My Pillu ❤️' }, { src: 'image2.jpg', cap: 'That Smile...' }],
+        right: [{ src: 'image3.jpg', cap: 'Awww ❤️' }, { src: 'image4.jpg', cap: 'Always You!' }]
     },
     8: { // Propose Day
-        left: [{src: 'image9.jpg', cap: 'The most beautiful couple ❤️'}, {src: 'image10.jpg', cap: 'Cutie Patooties'}],
-        right: [{src: 'image11.jpg', cap: 'Birthday vibes ❤️'}, {src: 'image12.jpg', cap: 'Our First Date'}]
+        left: [{ src: 'image9.jpg', cap: 'The most beautiful couple ❤️' }, { src: 'image10.jpg', cap: 'Cutie Patooties' }],
+        right: [{ src: 'image11.jpg', cap: 'Birthday vibes ❤️' }, { src: 'image12.jpg', cap: 'Our First Date' }]
     },
     // Skipping chocolate day
     // 9: { // Chocolate Day (Update these with new photos later!)
@@ -17,8 +17,8 @@ const DAILY_MEMORIES = {
     //     right: [{src: 'image2.jpg', cap: 'Chocolate Sweet'}, {src: 'image4.jpg', cap: 'Pillu ❤️'}]
     // }
     10: {
-        left: [{src: 'image13.jpg', cap: 'Meli cutu pillu ❤️'}],
-        right: [{src: 'image14.jpg', cap: 'Awwww, Umuuahhhhh'}]
+        left: [{ src: 'image13.jpg', cap: 'Meli cutu pillu ❤️' }],
+        right: [{ src: 'image14.jpg', cap: 'Awwww, Umuuahhhhh' }]
     }
     // Add 10, 11, 12, 13, 14 as you get more photos!
 };
@@ -58,7 +58,7 @@ window.onload = () => {
     let savedProgress = parseInt(localStorage.getItem('valentineProgress')) || 7;
 
     // 1. Find the actual highest day released according to the current time
-    let latestReleasedByClock = 6; 
+    let latestReleasedByClock = 6;
     for (let d = 14; d >= 7; d--) {
         if (isDayReleased(d)) {
             latestReleasedByClock = d;
@@ -70,7 +70,7 @@ window.onload = () => {
     // If she is still on the teaser (6) but Day 7 has arrived, move her to 7.
     if (savedProgress < 7 && latestReleasedByClock >= 7) {
         savedProgress = 7;
-    } 
+    }
     // 3. Security Check:
     // If her saved day hasn't been released yet (cheating), bring her back to today.
     else if (!isDayReleased(savedProgress) && !DEBUG_MODE) {
@@ -83,7 +83,7 @@ window.onload = () => {
 function showDay(dayNumber) {
     // 1. Hide all sections
     document.querySelectorAll('.day-section').forEach(s => s.classList.add('hidden'));
-    
+
     // 2. HIDE SIDEBARS by default whenever a new day is loaded
     const leftSide = document.getElementById('left-photos');
     const rightSide = document.getElementById('right-photos');
@@ -96,7 +96,7 @@ function showDay(dayNumber) {
     if (target) {
         target.classList.remove('hidden');
         updateSidebar(dayNumber);
-        
+
         // Only init games for current day
         if (dayNumber === 8) initProposeDay();
         if (dayNumber === 9) initChocolateDay();
@@ -121,9 +121,9 @@ function handleDayComplete(nextDay) {
 
 function showLockedModal(day) {
     // 1. Calculate the date string for the next day
-    const nextDate = new Date(2026, 1, day).toLocaleDateString('en-US', { 
-        month: 'long', 
-        day: 'numeric' 
+    const nextDate = new Date(2026, 1, day).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric'
     });
 
     // 2. Identify which day she just finished (the previous day)
@@ -405,7 +405,7 @@ function initTeddySqueeze() {
     const bear = document.getElementById('hug-teddy');
     const bearStage = document.getElementById('teddy-stage-squeeze');
     const meterFill = document.getElementById('hug-meter-fill');
-    
+
     // Configuration
     const baseScale = 1;
     const maxExtraScale = 3.5; // This will make the bear 4.5x its size at the end
@@ -415,18 +415,18 @@ function initTeddySqueeze() {
 
     function startSqueeze() {
         if (hugProgress >= HUG_GOAL) return;
-        
+
         hugInterval = setInterval(() => {
             hugProgress += 1;
-            
+
             // 1. Update Meter
             meterFill.style.width = hugProgress + "%";
-            
+
             // 2. DYNAMIC SCALING
             // As hugProgress goes 0 -> 100, scale goes 1 -> 4.5
             let currentScale = baseScale + (hugProgress / 100) * maxExtraScale;
             bear.style.transform = `scale(${currentScale})`;
-            
+
             // 3. Effects
             if (hugProgress % 4 === 0) spawnHugHeart();
 
@@ -438,7 +438,7 @@ function initTeddySqueeze() {
 
     function stopSqueeze() {
         clearInterval(hugInterval);
-        
+
         // Reset scale and progress if they let go early
         if (hugProgress < HUG_GOAL) {
             hugProgress = 0;
@@ -452,14 +452,14 @@ function initTeddySqueeze() {
         const heart = document.createElement('div');
         heart.className = 'hug-heart';
         heart.innerHTML = '❤️';
-        
+
         // As the bear grows, spread hearts further out
-        const spread = 200 + (hugProgress * 2); 
-        const randomX = (Math.random() - 0.5) * spread; 
-        
+        const spread = 200 + (hugProgress * 2);
+        const randomX = (Math.random() - 0.5) * spread;
+
         heart.style.left = `calc(50% + ${randomX}px)`;
         heart.style.top = '50%';
-        
+
         heartContainer.appendChild(heart);
         setTimeout(() => heart.remove(), 1500);
     }
@@ -468,11 +468,11 @@ function initTeddySqueeze() {
         showSuccessPhotos(10);
         clearInterval(hugInterval);
         // Keep the bear at full size for a moment of triumph
-        
+
         const successCard = document.getElementById('teddy-success');
         successCard.classList.remove('hidden');
         setTimeout(() => successCard.classList.add('show'), 100);
-        
+
         spawnInitialHeartBurst();
     }
 }
