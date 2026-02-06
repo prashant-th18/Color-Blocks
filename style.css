@@ -418,14 +418,30 @@ body {
     /* Ensure it stays above everything when moving */
 }
 
-/* Glass card style for success message */
 .glass-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    padding: 40px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
     border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    
+    /* THE FIX: Control the width */
+    width: 90%;            /* Responsive on small screens */
+    max-width: 450px;      /* Prevents it from getting too wide on desktop */
+    margin: 20px auto;     /* Centers it horizontally */
+    
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+}
+
+/* Ensure the text inside doesn't hit the edges */
+.glass-card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #4a5568;
 }
 
 /* Add to style.css */

@@ -39,6 +39,8 @@ function initProposeDay() {
 
     if (yesBtn) {
         yesBtn.addEventListener('click', () => {
+            if(window.showSuccessPhotos) window.showSuccessPhotos(8);
+            
             // Remove all the "cry" images when she finally says Yes
             const cryPhotos = document.querySelectorAll('.cry-photo');
             cryPhotos.forEach(photo => photo.remove());

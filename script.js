@@ -2,46 +2,105 @@ let hugInterval;
 let hugProgress = 0;
 const HUG_GOAL = 100;
 
+const DAILY_MEMORIES = {
+    7: { // Rose Day
+        left: [{src: 'image1.jpg', cap: 'My Pillu ❤️'}, {src: 'image2.jpg', cap: 'That Smile...'}],
+        right: [{src: 'image3.jpg', cap: 'Awww ❤️'}, {src: 'image4.jpg', cap: 'Always You!'}]
+    },
+    8: { // Propose Day
+        left: [{src: 'image9.jpg', cap: 'The most beautiful couple ❤️'}, {src: 'image10.jpg', cap: 'Cutie Patooties'}],
+        right: [{src: 'image11.jpg', cap: 'Birthday vibes ❤️'}, {src: 'image12.jpg', cap: 'Our First Date'}]
+    },
+    // Skipping chocolate day
+    // 9: { // Chocolate Day (Update these with new photos later!)
+    //     left: [{src: 'image1.jpg', cap: 'Sweetest person'}, {src: 'image3.jpg', cap: 'My happiness'}],
+    //     right: [{src: 'image2.jpg', cap: 'Chocolate Sweet'}, {src: 'image4.jpg', cap: 'Pillu ❤️'}]
+    // }
+    10: {
+        left: [{src: 'image13.jpg', cap: 'Meli cutu pillu ❤️'}],
+        right: [{src: 'image14.jpg', cap: 'Awwww, Umuuahhhhh'}]
+    }
+    // Add 10, 11, 12, 13, 14 as you get more photos!
+};
+
+function showSuccessPhotos(day) {
+    const memories = DAILY_MEMORIES[day];
+    if (!memories) return;
+
+    const leftContainer = document.getElementById('left-photos');
+    const rightContainer = document.getElementById('right-photos');
+
+    const createMarkup = (photos) => photos.map(p => `
+        <div class="polaroid">
+            <img src="${p.src}">
+            <div class="caption">${p.cap}</div>
+        </div>
+    `).join('');
+
+    leftContainer.innerHTML = createMarkup(memories.left);
+    rightContainer.innerHTML = createMarkup(memories.right);
+
+    // Fade in
+    leftContainer.classList.remove('hidden');
+    rightContainer.classList.remove('hidden');
+    setTimeout(() => {
+        leftContainer.style.opacity = '1';
+        rightContainer.style.opacity = '1';
+    }, 100);
+}
+
 // --- INITIALIZATION ---
 let currentProgress = parseInt(localStorage.getItem('valentineProgress')) || 6;
 const DEBUG_MODE = false;
 
 window.onload = () => {
-    let savedProgress = parseInt(localStorage.getItem('valentineProgress')) || 6;
+    // Default to 7 for the first-time experience
+    let savedProgress = parseInt(localStorage.getItem('valentineProgress')) || 7;
 
-    // Engineering Check: Don't let her go to a day that hasn't arrived yet
-    // unless DEBUG_MODE is on.
-    if (!isDayReleased(savedProgress) && !DEBUG_MODE) {
-        // Fall back to the highest released day
-        for (let d = 14; d >= 7; d--) {
-            if (isDayReleased(d)) {
-                savedProgress = d;
-                break;
-            }
+    // 1. Find the actual highest day released according to the current time
+    let latestReleasedByClock = 6; 
+    for (let d = 14; d >= 7; d--) {
+        if (isDayReleased(d)) {
+            latestReleasedByClock = d;
+            break;
         }
+    }
+
+    // 2. Automatic Transition Logic:
+    // If she is still on the teaser (6) but Day 7 has arrived, move her to 7.
+    if (savedProgress < 7 && latestReleasedByClock >= 7) {
+        savedProgress = 7;
+    } 
+    // 3. Security Check:
+    // If her saved day hasn't been released yet (cheating), bring her back to today.
+    else if (!isDayReleased(savedProgress) && !DEBUG_MODE) {
+        savedProgress = latestReleasedByClock;
     }
 
     showDay(savedProgress);
 };
 
 function showDay(dayNumber) {
+    // 1. Hide all sections
     document.querySelectorAll('.day-section').forEach(s => s.classList.add('hidden'));
     
-    // If it's before the 7th, always force Day 6
-    let targetDay = dayNumber;
-    if (dayNumber < 7 && !DEBUG_MODE) {
-        targetDay = 6;
-    }
+    // 2. HIDE SIDEBARS by default whenever a new day is loaded
+    const leftSide = document.getElementById('left-photos');
+    const rightSide = document.getElementById('right-photos');
+    leftSide.classList.add('hidden');
+    leftSide.style.opacity = '0';
+    rightSide.classList.add('hidden');
+    rightSide.style.opacity = '0';
 
-    const target = document.getElementById(`section-${targetDay}`);
+    const target = document.getElementById(`section-${dayNumber}`);
     if (target) {
         target.classList.remove('hidden');
-        updateSidebar(targetDay);
+        updateSidebar(dayNumber);
         
-        // Only init games for 7+
-        if (targetDay === 8) initProposeDay();
-        if (targetDay === 9) initChocolateDay();
-        if (targetDay === 10) initTeddySqueeze();
+        // Only init games for current day
+        if (dayNumber === 8) initProposeDay();
+        if (dayNumber === 9) initChocolateDay();
+        if (dayNumber === 10) initTeddySqueeze();
     }
 }
 
@@ -185,20 +244,7 @@ function createPetal(isInitial = false) {
 function completeRoseDay() {
     isFinished = true;
 
-    // 1. Existing logic (background, title hide, etc.)
-    document.body.style.background = 'linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%)';
-    const ui = document.getElementById('ui-overlay');
-    if (ui) ui.style.opacity = '0';
-
-    // 2. Select the sidebars
-    const leftSide = document.getElementById('left-photos');
-    const rightSide = document.getElementById('right-photos');
-
-    // 3. Reveal the sidebars
-    leftSide.classList.remove('hidden');
-    leftSide.classList.add('visible');
-    rightSide.classList.remove('hidden');
-    rightSide.classList.add('visible');
+    showSuccessPhotos(7);
 
     // 4. Trigger the fade-in after the browser renders the display change
     setTimeout(() => {
@@ -335,6 +381,7 @@ function initChocolateDay() {
                         matchedPairs++;
                         flippedCards = [];
                         if (matchedPairs === images.length) {
+                            // showSuccessPhotos(9);
                             setTimeout(() => {
                                 document.getElementById('chocolate-success').classList.remove('hidden');
                                 document.getElementById('chocolate-success').classList.add('show');
@@ -418,6 +465,7 @@ function initTeddySqueeze() {
     }
 
     function finishHug() {
+        showSuccessPhotos(10);
         clearInterval(hugInterval);
         // Keep the bear at full size for a moment of triumph
         
