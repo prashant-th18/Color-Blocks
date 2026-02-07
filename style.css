@@ -4,13 +4,19 @@
     box-sizing: border-box;
 }
 
+html {
+    /* Ensures smooth scrolling for the auto-scroll features */
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8fafc;
-    /* Start with a clean, neutral grey-white */
-    overflow: hidden;
-    /* No scrolling on desktop */
+    /* CHANGE: Allow vertical scrolling, prevent horizontal */
+    overflow-y: auto;
+    overflow-x: hidden;
     transition: background 2s ease;
+    min-height: 100vh;
 }
 
 #waiting-container {
@@ -77,6 +83,11 @@ body {
     pointer-events: none;
     /* Allows clicking "through" the text */
     z-index: 10;
+}
+
+#main-wrapper {
+    width: 100%;
+    overflow: visible;
 }
 
 #main-title {
@@ -539,24 +550,38 @@ body {
     }
 }
 
-/* Chocolate Day Specifics */
 #chocolate-container {
+    /* Change from height: 100vh to min-height */
     min-height: 100vh;
+    width: 100vw;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Start from top to prevent overlap */
+    padding-top: 60px;
+    
+    /* Allow scrolling */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 120px; /* Space for the button at the bottom */
+    scroll-behavior: smooth;
 }
 
 #chocolate-grid {
     display: grid;
     grid-template-columns: repeat(4, 150px);
-    /* 4 columns of 150px each */
     gap: 20px;
-    margin: 30px auto;
+    margin: 40px auto; /* More breathing room */
     perspective: 1000px;
-    /* Crucial for 3D flip */
+}
+
+/* Ensure the success card doesn't feel squashed */
+#chocolate-success.glass-card {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 100;
 }
 
 .chocolate-card {
@@ -737,19 +762,31 @@ body {
 
 
 #promise-container {
-    min-height: 100vh;
-    /* Use min-height to prevent clipping */
+    /* Change height to min-height to allow expansion */
+    min-height: 100vh; 
     width: 100vw;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    /* Start from the top */
     padding-top: 50px;
-    /* Space from the top of the screen */
+    /* ADD THIS: Allow vertical scrolling if content is too tall */
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    /* ADD THIS: Space at the bottom for the button */
+    padding-bottom: 100px; 
     background: radial-gradient(circle, #fff5f6 0%, #ffdee2 100%);
-    overflow: hidden;
+    /* Smooth scrolling feel */
+    scroll-behavior: smooth;
+}
+
+/* Ensure the success card doesn't look cramped at the bottom */
+#promise-success.glass-card {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 100;
 }
 
 #unlock-stage {
@@ -878,4 +915,39 @@ body {
     50% {
         opacity: 1;
     }
+}
+
+/* Update all these sections in your style.css */
+
+#waiting-container,
+#garden-container,
+#propose-container,
+#teddy-squeeze-container,
+#chocolate-container,
+#promise-container {
+    /* CHANGE: Use min-height instead of height */
+    min-height: 100vh;
+    height: auto; 
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Remove internal overflows to let the body handle the scrollbar */
+#chocolate-container,
+#promise-container {
+    overflow-y: visible; 
+}
+
+.photo-sidebar {
+    position: fixed; /* Changed from absolute to fixed */
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    z-index: 5;
+    transition: opacity 1.5s ease-in-out;
 }

@@ -66,17 +66,17 @@ function initPromiseDay() {
  * Calculates a random position that is NOT in the center 40% of the screen
  */
 function getFarAwayPosition() {
-    let x, y, distance;
+    let x, y, isTooClose;
     do {
-        x = Math.random() * 80 + 10; // 10% to 90%
-        y = Math.random() * 70 + 15; // 15% to 85%
+        x = Math.random() * 80 + 10; // 10% to 90% width
+        y = Math.random() * 80 + 10; // 10% to 90% height
         
-        // Calculate distance from center (50, 50)
-        // We want them to be at least 30 units away from center
-        const dx = x - 50;
-        const dy = y - 50;
-        distance = Math.sqrt(dx * dx + dy * dy);
-    } while (distance < 30); // Keep looking if it's too close to center
+        // Check if it's in the "Danger Zone" (where title and heart are)
+        // Title and Heart are roughly in the top-middle (x: 30-70, y: 0-60)
+        const inTopMiddle = (x > 25 && x < 75 && y < 65);
+        isTooClose = inTopMiddle;
+        
+    } while (isTooClose); 
 
     return { x, y };
 }
@@ -124,8 +124,13 @@ function finishPromiseDay() {
     
     setTimeout(() => {
         if (typeof showSuccessPhotos === 'function') showSuccessPhotos(11);
+        
         successCard.classList.remove('hidden');
         successCard.classList.add('show');
+
+        // ADD THIS: Smoothly scroll to the success card so she sees the button
+        // successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
         if (typeof spawnInitialHeartBurst === 'function') spawnInitialHeartBurst();
     }, 1000);
 }
