@@ -366,7 +366,6 @@ body {
 }
 
 
-
 #propose-container {
     height: 100vh;
     display: flex;
@@ -374,6 +373,20 @@ body {
     justify-content: center;
     align-items: center;
     background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
+}
+
+#meme-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+}
+
+/* This forces the Tenor container to respect the size of our wrapper */
+.tenor-gif-embed {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .romantic-title {

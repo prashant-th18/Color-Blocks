@@ -81,6 +81,12 @@ window.onload = () => {
 };
 
 function showDay(dayNumber) {
+    const music = document.getElementById('happy-music');
+    if (music) {
+        music.pause();
+        music.currentTime = 0; // Resets song to the start
+    }
+
     // 1. Hide all sections
     document.querySelectorAll('.day-section').forEach(s => s.classList.add('hidden'));
 
@@ -244,20 +250,20 @@ function createPetal(isInitial = false) {
 function completeRoseDay() {
     isFinished = true;
 
+    // 1. Reveal the unique memories for Rose Day
+    // This function already handles the opacity and class changes
     showSuccessPhotos(7);
 
-    // 4. Trigger the fade-in after the browser renders the display change
-    setTimeout(() => {
-        leftSide.style.opacity = '1';
-        rightSide.style.opacity = '1';
-    }, 100);
-
-    // 5. Show the central message card
+    // 2. Show the central message card
+    // We delay this slightly so she has a moment to notice the photos appearing
     setTimeout(() => {
         const messageCard = document.getElementById('message-card');
-        messageCard.classList.remove('hidden');
-        setTimeout(() => messageCard.classList.add('show'), 100);
-    }, 1500); // Delay the card slightly so she sees the photos first
+        if (messageCard) {
+            messageCard.classList.remove('hidden');
+            // Small nested timeout ensures the 'show' transition triggers properly
+            setTimeout(() => messageCard.classList.add('show'), 100);
+        }
+    }, 1500);
 }
 
 // Simple function to scatter hearts across the screen once
