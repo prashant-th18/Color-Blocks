@@ -121,12 +121,37 @@
                 </div>
             </div>
         </section>
+        <section id="section-11" class="day-section hidden">
+            <div id="promise-container">
+                <h1 class="romantic-title">My Vows to You ❤️</h1>
+
+                <p class="instruction">Find the 5 golden keys hidden on this page and drag them to my heart to unlock
+                    it...</p>
+
+                <div id="unlock-stage">
+                    <div id="lock-zone">
+                        <div id="heart-lock-icon" class="glowing-heart">❤️</div>
+                        <div id="active-promise" class="promise-text"></div>
+                    </div>
+                </div>
+
+                <div id="scatter-area"></div>
+
+                <div id="promise-success" class="hidden glass-card">
+                    <h2>Our Eternal Bond 🥰</h2>
+                    <p>Every vow unlocked is a piece of my soul I give to you. I promise to cherish us, today and every
+                        tomorrow.</p>
+                    <button class="continue-btn" onclick="handleDayComplete(12)">See you on Feb 12</button>
+                </div>
+            </div>
+        </section>
     </div>
 
     <div class="photo-sidebar left-side hidden" id="left-photos" style="opacity: 0;"></div>
     <div class="photo-sidebar right-side hidden" id="right-photos" style="opacity: 0;"></div>
     <script src="script.js"></script>
     <script src="propose.js"></script>
+    <script src="promise.js"></script>
     <audio id="happy-music" src="happy_happy_happy.mp3" loop></audio>
 </body>
 

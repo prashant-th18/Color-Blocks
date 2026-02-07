@@ -19,7 +19,11 @@ const DAILY_MEMORIES = {
     10: {
         left: [{ src: 'image13.jpg', cap: 'Meli cutu pillu ❤️' }],
         right: [{ src: 'image14.jpg', cap: 'Awwww, Umuuahhhhh' }]
-    }
+    },
+    11: {
+        left: [{ src: 'image15.jpg', cap: 'Slayyyy' }, { src: 'image16.jpg', cap: 'Love youuu' }],
+        right: [{ src: 'image17.jpg', cap: 'Apratim ❤️' }, { src: 'image18.jpg', cap: 'Special Day ❤️' }]
+    },
     // Add 10, 11, 12, 13, 14 as you get more photos!
 };
 
@@ -107,6 +111,7 @@ function showDay(dayNumber) {
         if (dayNumber === 8) initProposeDay();
         if (dayNumber === 9) initChocolateDay();
         if (dayNumber === 10) initTeddySqueeze();
+        if (dayNumber === 11) initPromiseDay();
     }
 }
 

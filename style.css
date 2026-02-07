@@ -24,8 +24,17 @@ body {
 }
 
 @keyframes softPulse {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.05); opacity: 1; }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
 }
 
 .timer-box {
@@ -77,9 +86,11 @@ body {
     margin-bottom: 10px;
 }
 
-#instruction {
-    color: #64748b;
-    font-size: 1.2rem;
+.instruction {
+    margin-bottom: 20px;
+    max-width: 80% !important;
+    /* Keep text from getting too wide */
+    text-align: center;
 }
 
 /* The Rose Emoji Styling */
@@ -386,7 +397,7 @@ body {
 .tenor-gif-embed {
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .romantic-title {
@@ -439,12 +450,15 @@ body {
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    
+
     /* THE FIX: Control the width */
-    width: 90%;            /* Responsive on small screens */
-    max-width: 450px;      /* Prevents it from getting too wide on desktop */
-    margin: 20px auto;     /* Centers it horizontally */
-    
+    width: 90%;
+    /* Responsive on small screens */
+    max-width: 450px;
+    /* Prevents it from getting too wide on desktop */
+    margin: 20px auto;
+    /* Centers it horizontally */
+
     text-align: center;
     transition: all 0.5s ease;
 }
@@ -608,21 +622,26 @@ body {
 #teddy-stage-squeeze {
     position: relative;
     width: 100%;
-    height: 60vh; /* Give it vertical breathing room */
+    height: 60vh;
+    /* Give it vertical breathing room */
     display: flex;
     justify-content: center;
-    z-index: 1; /* Lowest container layer */
+    z-index: 1;
+    /* Lowest container layer */
     align-items: center;
-    overflow: visible; /* Allows the bear to grow outside the circle */
+    overflow: visible;
+    /* Allows the bear to grow outside the circle */
 }
 
 #hug-teddy {
-    width: 250px; /* Base size */
+    width: 250px;
+    /* Base size */
     height: auto;
     z-index: 5;
     /* Remove transition or set it very low so it feels reactive to the meter */
-    transition: transform 0.05s linear; 
-    will-change: transform; /* Engineering tip: helps browser optimize scaling */
+    transition: transform 0.05s linear;
+    will-change: transform;
+    /* Engineering tip: helps browser optimize scaling */
 }
 
 /* The visual squeeze effect */
@@ -689,24 +708,174 @@ body {
 
 .mega-scale {
     /* Scale to 3x its size (or whatever fits your screen best) */
-    transform: scale(2.8); 
+    transform: scale(2.8);
 }
 
 #teddy-success {
-    position: fixed; /* Takes it out of the normal flow */
+    position: fixed;
+    /* Takes it out of the normal flow */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.9); /* Centered and slightly smaller for entrance */
-    z-index: 9999; /* Higher than any other element on the page */
+    transform: translate(-50%, -50%) scale(0.9);
+    /* Centered and slightly smaller for entrance */
+    z-index: 9999;
+    /* Higher than any other element on the page */
     width: 90%;
     max-width: 450px;
     opacity: 0;
-    pointer-events: none; /* Can't click it while hidden */
+    pointer-events: none;
+    /* Can't click it while hidden */
     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 #teddy-success.show {
     opacity: 1;
-    pointer-events: auto; /* Re-enable buttons when visible */
+    pointer-events: auto;
+    /* Re-enable buttons when visible */
     transform: translate(-50%, -50%) scale(1);
+}
+
+
+#promise-container {
+    min-height: 100vh;
+    /* Use min-height to prevent clipping */
+    width: 100vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* Start from the top */
+    padding-top: 50px;
+    /* Space from the top of the screen */
+    background: radial-gradient(circle, #fff5f6 0%, #ffdee2 100%);
+    overflow: hidden;
+}
+
+#unlock-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    /* Space between instruction and the heart */
+    z-index: 5;
+}
+
+#lock-zone {
+    width: 400px;
+    /* Slightly wider for the text */
+    height: 400px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 20px 40px rgba(255, 77, 109, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The Big Glowing Heart */
+.glowing-heart {
+    font-size: 8rem;
+    cursor: default;
+    user-select: none;
+    filter: drop-shadow(0 0 10px #ff4d6d);
+    animation: heartPulse 2s infinite ease-in-out;
+    transition: all 0.5s ease;
+}
+
+@keyframes heartPulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px #ff4d6d);
+    }
+
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 25px #ff758f);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px #ff4d6d);
+    }
+}
+
+#lock-zone.drag-over {
+    background: rgba(255, 77, 109, 0.2);
+    border-color: #ff4d6d;
+    transform: scale(1.05);
+}
+
+/* Success State for Heart */
+.glowing-heart.unlocked {
+    animation: heartBeat 0.5s infinite alternate;
+    color: #ff0033;
+    filter: drop-shadow(0 0 40px #ff0033);
+}
+
+@keyframes heartBeat {
+    to {
+        transform: scale(1.2);
+    }
+}
+
+.golden-key {
+    position: absolute;
+    font-size: 3rem;
+    cursor: grab;
+    z-index: 20;
+    filter: drop-shadow(2px 4px 5px rgba(0, 0, 0, 0.2));
+}
+
+.promise-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    /* Significantly larger */
+    font-weight: 700;
+    line-height: 1.4;
+
+    /* Beautiful Pink-to-Red Gradient */
+    background: linear-gradient(to bottom, #ff4d6d, #c9184a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Soft Glow and Outline to make it "pop" */
+    text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.1);
+    filter: drop-shadow(0 0 5px rgba(255, 77, 109, 0.3));
+
+    text-align: center;
+    padding: 10px 30px;
+    min-height: 120px;
+    /* Prevents jumping as lines grow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+/* The "Blinking Cursor" - a cute little heart */
+.promise-text::after {
+    content: '❤️';
+    font-size: 1.2rem;
+    margin-left: 5px;
+    animation: cursorBlink 0.8s infinite;
+    vertical-align: middle;
+}
+
+@keyframes cursorBlink {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
