@@ -24,7 +24,15 @@ const DAILY_MEMORIES = {
         left: [{ src: 'image15.jpg', cap: 'Slayyyy' }, { src: 'image16.jpg', cap: 'Love youuu' }],
         right: [{ src: 'image17.jpg', cap: 'Apratim ❤️' }, { src: 'image18.jpg', cap: 'Special Day ❤️' }]
     },
-    // Add 10, 11, 12, 13, 14 as you get more photos!
+    12: {
+        left: [{ src: 'image15.jpg', cap: 'Slayyyy' }, { src: 'image16.jpg', cap: 'Love youuu' }],
+        right: [{ src: 'image17.jpg', cap: 'Apratim ❤️' }, { src: 'image18.jpg', cap: 'Special Day ❤️' }]
+    },
+    13: {
+        left: [{ src: 'image19.jpg', cap: 'Sweet Kisses, Umuaahhh' }, { src: 'image20.jpg', cap: 'I Love You Infiniteee' }],
+        right: [{ src: 'image21.jpg', cap: 'We the bestestt!!' }, { src: 'image22.jpg', cap: 'Ohh myy myyy ❤️' }]
+    },
+
 };
 
 function showSuccessPhotos(day) {
@@ -112,6 +120,8 @@ function showDay(dayNumber) {
         if (dayNumber === 9) initChocolateDay();
         if (dayNumber === 10) initTeddySqueeze();
         if (dayNumber === 11) initPromiseDay();
+        if (dayNumber === 12) initHugDay();
+        if (dayNumber === 13) initKissDay();
     }
 }
 
@@ -146,7 +156,9 @@ function showLockedModal(day) {
         7: 'message-card',
         8: 'propose-success',
         9: 'chocolate-success',
-        10: 'teddy-success'
+        10: 'teddy-success',
+        11: 'promise-success',
+        13: 'kiss-success' // Added
     };
 
     const activeCardId = successCardIds[finishedDay];

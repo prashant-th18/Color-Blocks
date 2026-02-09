@@ -101,7 +101,7 @@
 
                 <div id="hug-workshop">
                     <div id="teddy-stage-squeeze">
-                        <img src="https://pngimg.com/d/teddy_bear_PNG63.png" id="hug-teddy" alt="Teddy Bear">
+                        <img src="teddy_bear.png" id="hug-teddy" alt="Teddy Bear">
                         <div id="hug-heart-container"></div>
                     </div>
 
@@ -145,6 +145,93 @@
                 </div>
             </div>
         </section>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <section id="section-12" class="day-section hidden">
+            <div class="flex-center-column" style="height: 100vh;">
+                <h1 class="romantic-title">Hug Day Surprise Coming Soon... ❤️</h1>
+                <button class="continue-btn" onclick="handleDayComplete(13)">Skip to Kiss Day (Debug)</button>
+            </div>
+        </section>
+
+        <section id="section-13" class="day-section hidden">
+            <div id="kiss-day-container">
+                <div id="kiss-messages" class="hidden">
+                    <div class="kiss-stage-wrapper">
+                        <!-- <div class="kiss-gif-side">
+                            <div class="tenor-gif-embed" data-postid="14214959161183864003" data-share-method="host"
+                                data-aspect-ratio="1" data-width="100%">
+                                <a href="https://tenor.com/view/madebychie-mocha-and-milk-gif-14214959161183864003">Madebychie
+                                    Mocha And Milk Sticker</a>
+                            </div>
+                        </div> -->
+
+                        <div class="kiss-text-center">
+                            <h1 class="romantic-title" id="kiss-text-display"></h1>
+                        </div>
+
+                        <!-- <div class="kiss-gif-side">
+                            <div class="tenor-gif-embed" data-postid="16043159" data-share-method="host"
+                                data-aspect-ratio="1" data-width="100%">
+                                <a href="https://tenor.com/view/kawaii-budding-pop-crying-cry-hearts-gif-16043159">Kawaii
+                                    Budding Pop Sticker</a>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+                <div id="kiss-map-stage" class="hidden">
+                    <h2 class="romantic-title">The Distance Between Us...</h2>
+
+                    <div class="kiss-map-wrapper">
+                        <div class="kiss-gif-side">
+                            <div class="tenor-gif-embed" data-postid="14214959161183864003" data-share-method="host"
+                                data-aspect-ratio="1" data-width="100%">
+                                <a href="https://tenor.com/view/madebychie-mocha-and-milk-gif-14214959161183864003">Madebychie
+                                    Mocha And Milk Sticker</a>
+                            </div>
+                        </div>
+
+                        <div class="kiss-map-center">
+                            <div id="kiss-map"></div>
+                            <div id="kiss-distance-info" class="distance-info"></div>
+                            <button class="continue-btn" id="start-kiss-btn">It's too far... let's fix it</button>
+                        </div>
+
+                        <div class="kiss-gif-side">
+                            <div class="tenor-gif-embed" data-postid="16043159" data-share-method="host"
+                                data-aspect-ratio="1" data-width="100%">
+                                <a href="https://tenor.com/view/kawaii-budding-pop-crying-cry-hearts-gif-16043159">Kawaii
+                                    Budding Pop Sticker</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="kiss-camera-stage" class="hidden flex-center-column">
+                    <h2 class="romantic-title">Give me a kiss, Pillu...</h2>
+                    <p class="instruction">Kiss the camera to send me your love!</p>
+
+                    <div class="camera-wrapper">
+                        <video id="kiss-video" autoplay playsinline muted></video>
+                        <div id="kiss-overlay-crying">🥺💋</div>
+                    </div>
+
+                    <div id="kiss-status">Waiting for your kiss...</div>
+                </div>
+
+                <div id="kiss-success" class="hidden glass-card">
+                    <h2>Kiss Received! 🥰</h2>
+                    <p>I felt that! Even with the miles between Pune and Bangalore, your love reaches me perfectly. I
+                        love you, bebo!</p>
+                    <button class="continue-btn" onclick="handleDayComplete(14)">See you on Valentine's Day!</button>
+                </div>
+            </div>
+        </section>
+
+        <script src="kiss.js"></script>
     </div>
 
     <div class="photo-sidebar left-side hidden" id="left-photos" style="opacity: 0;"></div>
@@ -152,6 +239,8 @@
     <script src="script.js"></script>
     <script src="propose.js"></script>
     <script src="promise.js"></script>
+    <script src="hug.js"></script>
+    <video id="hug-video" autoplay playsinline muted></video>
     <audio id="happy-music" src="happy_happy_happy.mp3" loop></audio>
 </body>
 

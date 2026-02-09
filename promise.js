@@ -13,7 +13,7 @@ function initPromiseDay() {
     const lockZone = document.getElementById('lock-zone');
     const heartIcon = document.getElementById('heart-lock-icon');
     const promiseDisplay = document.getElementById('active-promise');
-    
+
     scatterArea.innerHTML = '';
     keysUnlocked = 0;
     heartIcon.classList.remove('unlocked');
@@ -31,7 +31,7 @@ function initPromiseDay() {
         const pos = getFarAwayPosition();
         key.style.left = pos.x + 'vw';
         key.style.top = pos.y + 'vh';
-        
+
         const randomRot = Math.floor(Math.random() * 60) - 30;
         key.style.transform = `rotate(${randomRot}deg)`;
 
@@ -46,7 +46,7 @@ function initPromiseDay() {
 
     // Drag events
     lockZone.addEventListener('dragover', (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         lockZone.classList.add('drag-over');
     });
     lockZone.addEventListener('dragleave', () => lockZone.classList.remove('drag-over'));
@@ -70,13 +70,13 @@ function getFarAwayPosition() {
     do {
         x = Math.random() * 80 + 10; // 10% to 90% width
         y = Math.random() * 80 + 10; // 10% to 90% height
-        
+
         // Check if it's in the "Danger Zone" (where title and heart are)
         // Title and Heart are roughly in the top-middle (x: 30-70, y: 0-60)
         const inTopMiddle = (x > 25 && x < 75 && y < 65);
         isTooClose = inTopMiddle;
-        
-    } while (isTooClose); 
+
+    } while (isTooClose);
 
     return { x, y };
 }
@@ -85,18 +85,18 @@ function unlockNextPromise() {
     const promiseDisplay = document.getElementById('active-promise');
     const heartIcon = document.getElementById('heart-lock-icon');
     const fullText = myPromises[keysUnlocked];
-    
+
     // Clear and prepare
-    promiseDisplay.innerText = ""; 
+    promiseDisplay.innerText = "";
     promiseDisplay.style.opacity = '1';
-    
+
     let i = 0;
     function typeWriter() {
         if (i < fullText.length) {
             // Append the character
             promiseDisplay.innerHTML = fullText.substring(0, i + 1);
             i++;
-            
+
             // Every 3rd character, make the heart do a tiny "thump"
             if (i % 3 === 0) {
                 heartIcon.style.transform = 'scale(1.15)';
@@ -112,7 +112,7 @@ function unlockNextPromise() {
             }
         }
     }
-    
+
     typeWriter();
 }
 
@@ -121,10 +121,10 @@ function finishPromiseDay() {
     const successCard = document.getElementById('promise-success');
 
     heartIcon.classList.add('unlocked');
-    
+
     setTimeout(() => {
         if (typeof showSuccessPhotos === 'function') showSuccessPhotos(11);
-        
+
         successCard.classList.remove('hidden');
         successCard.classList.add('show');
 
