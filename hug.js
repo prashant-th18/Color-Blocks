@@ -3,11 +3,11 @@ let playerPos = [9, 0]; // Start: Bottom Left
 
 // 5 Tasks placed strictly on the path
 const TASKS = [
-    { pos: [8, 1], img: 'hug/image1.jpg', city: 'Lonavala', cleared: false },
-    { pos: [6, 3], img: 'hug/image2.jpg', city: 'Pune', cleared: false },
-    { pos: [9, 8], img: 'hug/image3.jpg', city: 'varkala', cleared: false },
-    { pos: [4, 7], img: 'hug/image4.jpg', city: 'Mumbai', cleared: false },
-    { pos: [1, 9], img: 'hug/image5.JPG', city: 'Nagpur', cleared: false }
+    { pos: [8, 1], img: 'hug/hug_image1.jpg', city: 'Lonavala', cleared: false },
+    { pos: [6, 3], img: 'hug/hug_image2.jpg', city: 'Pune', cleared: false },
+    { pos: [9, 8], img: 'hug/hug_image3.jpg', city: 'varkala', cleared: false },
+    { pos: [4, 7], img: 'hug/hug_image4.jpg', city: 'Mumbai', cleared: false },
+    { pos: [1, 9], img: 'hug/hug_image5.jpg', city: 'Nagpur', cleared: false }
 ];
 
 // A single, complex winding path from (9,0) to (0,9)
