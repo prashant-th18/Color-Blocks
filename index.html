@@ -148,9 +148,51 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <section id="section-12" class="day-section hidden">
-            <div class="flex-center-column" style="height: 100vh;">
-                <h1 class="romantic-title">Hug Day Surprise Coming Soon... ❤️</h1>
-                <button class="continue-btn" onclick="handleDayComplete(13)">Skip to Kiss Day (Debug)</button>
+            <div id="maze-container">
+                <h1 class="romantic-title">The Journey to a Hug ❤️</h1>
+                <p class="instruction">Get through the maze to reach me. Complete the memory tasks to clear the
+                    path, hihi!</p>
+
+                <div id="maze-board">
+                </div>
+
+                <div id="maze-modal" class="hidden glass-card">
+                    <div id="modal-celebration" class="hidden">
+                        <div class="heart-burst">💖</div>
+                        <h2 class="yay-text">YAYAYA! Correct! 😍</h2>
+                    </div>
+
+                    <div id="modal-content-wrapper">
+                        <h2>Memory Check! 🫂</h2>
+                        <div class="modal-image-container">
+                            <img id="task-image" src="" alt="Memory">
+                        </div>
+                        <div class="quiz-controls">
+                            <p style="font-size: 0.9rem; margin-bottom: 10px; color: #000000;">Which city was this hug
+                                in?</p>
+                            <input type="text" id="city-guess" placeholder="City name..."
+                                onkeyup="if(event.key === 'Enter') checkMazeTask()">
+                            <button onclick="checkMazeTask()">Unlock Path</button>
+                        </div>
+                        <div id="modal-celebration" class="hidden">
+                            <div class="heart-burst">💖</div>
+                            <h2 class="yay-text">YAYAYA! Correct! 😍</h2>
+                        </div>
+                        <p id="modal-error" class="hidden" style="color: #ef4444; margin-top: 10px; font-weight: bold;">
+                            Incorrect! Try again, love. ❤️</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="hug-success-container" class="hidden">
+                <div id="hug-success-card" class="glass-card success-card">
+                    <h2 class="yay-text">YAYAYAY, you made itt!!! 😍</h2>
+                    <p class="romantic-message">
+                        I was waiting for your hug from such a longgg timeee!!!! <br>
+                        <b>Umuaahhhh! 💋</b>
+                    </p>
+                    <button class="continue-btn" onclick="handleDayComplete(13)">Continue to Kiss Day</button>
+                </div>
             </div>
         </section>
 
@@ -158,25 +200,9 @@
             <div id="kiss-day-container">
                 <div id="kiss-messages" class="hidden">
                     <div class="kiss-stage-wrapper">
-                        <!-- <div class="kiss-gif-side">
-                            <div class="tenor-gif-embed" data-postid="14214959161183864003" data-share-method="host"
-                                data-aspect-ratio="1" data-width="100%">
-                                <a href="https://tenor.com/view/madebychie-mocha-and-milk-gif-14214959161183864003">Madebychie
-                                    Mocha And Milk Sticker</a>
-                            </div>
-                        </div> -->
-
                         <div class="kiss-text-center">
                             <h1 class="romantic-title" id="kiss-text-display"></h1>
                         </div>
-
-                        <!-- <div class="kiss-gif-side">
-                            <div class="tenor-gif-embed" data-postid="16043159" data-share-method="host"
-                                data-aspect-ratio="1" data-width="100%">
-                                <a href="https://tenor.com/view/kawaii-budding-pop-crying-cry-hearts-gif-16043159">Kawaii
-                                    Budding Pop Sticker</a>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
 

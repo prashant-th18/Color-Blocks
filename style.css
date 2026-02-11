@@ -304,13 +304,14 @@ body {
 
 /* Sidebar positioning */
 .photo-sidebar {
-    position: absolute;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     gap: 30px;
-    z-index: 5;
+    /* CHANGE: Higher than 1000 so it stays above the success container */
+    z-index: 2001;
     transition: opacity 1.5s ease-in-out;
 }
 
@@ -944,18 +945,6 @@ body {
     overflow-y: visible;
 }
 
-.photo-sidebar {
-    position: fixed;
-    /* Changed from absolute to fixed */
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    z-index: 5;
-    transition: opacity 1.5s ease-in-out;
-}
-
 /* --- KISS DAY (FEB 13) STYLES --- */
 
 /* 1. Main Container & Centering Logic */
@@ -965,7 +954,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Keeps current active stage centered */
+    justify-content: center;
+    /* Keeps current active stage centered */
     position: relative;
     background: radial-gradient(circle, #fff5f6 0%, #ffdee2 100%);
 }
@@ -973,10 +963,14 @@ body {
 
 /* Centers the success card perfectly once kiss is detected */
 #kiss-day-container.success-mode {
-    height: 100vh;      /* Lock it to screen height */
-    padding-top: 0;     /* Remove the top offset */
-    justify-content: center; /* Center vertically */
-    overflow: hidden;   /* Prevent accidental scrolling when done */
+    height: 100vh;
+    /* Lock it to screen height */
+    padding-top: 0;
+    /* Remove the top offset */
+    justify-content: center;
+    /* Center vertically */
+    overflow: hidden;
+    /* Prevent accidental scrolling when done */
 }
 
 /* 2. Message Stage Centering */
@@ -1000,8 +994,8 @@ body {
 .camera-wrapper {
     position: relative;
     /* Increased from 320x240 to 480x360 for better visibility */
-    width: 480px; 
-    height: 360px; 
+    width: 480px;
+    height: 360px;
     border-radius: 25px;
     overflow: hidden;
     border: 6px solid #ff4d6d;
@@ -1014,13 +1008,16 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scaleX(-1); /* Keep the mirrored look */
+    transform: scaleX(-1);
+    /* Keep the mirrored look */
 }
 
 #kiss-overlay-crying {
     position: absolute;
-    top: 0; left: 0; 
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1033,9 +1030,17 @@ body {
 
 /* 5. Animations & Success States */
 @keyframes cryingShake {
-    0% { transform: translate(0, 0); }
-    25% { transform: translate(5px, -5px); }
-    75% { transform: translate(-5px, 5px); }
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(5px, -5px);
+    }
+
+    75% {
+        transform: translate(-5px, 5px);
+    }
 }
 
 #kiss-status {
@@ -1046,7 +1051,8 @@ body {
 }
 
 .kiss-gif-side {
-    width: 200px; /* Adjust size of GIFs here */
+    width: 200px;
+    /* Adjust size of GIFs here */
     flex-shrink: 0;
     border-radius: 15px;
     overflow: hidden;
@@ -1068,6 +1074,7 @@ body {
     .kiss-stage-wrapper {
         flex-direction: column;
     }
+
     .kiss-gif-side {
         width: 150px;
     }
@@ -1089,7 +1096,7 @@ body {
 }
 
 #kiss-success.glass-card {
-    margin: 0 auto; 
+    margin: 0 auto;
     transform: scale(0.9);
     opacity: 0;
     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -1126,12 +1133,13 @@ body {
 }
 
 #kiss-map-stage .kiss-gif-side {
-    width: 180px; 
+    width: 180px;
     flex-shrink: 0;
 }
 
 #kiss-map {
-    height: 450px; /* Made slightly taller */
+    height: 450px;
+    /* Made slightly taller */
     width: 100%;
     max-width: 750px;
     border-radius: 20px;
@@ -1144,10 +1152,13 @@ body {
     .kiss-map-wrapper {
         flex-direction: column;
     }
+
     #kiss-map-stage .kiss-gif-side {
         width: 120px;
-        order: 2; /* Move GIFs below map on mobile if you prefer */
+        order: 2;
+        /* Move GIFs below map on mobile if you prefer */
     }
+
     .kiss-map-center {
         order: 1;
         width: 100%;
@@ -1163,17 +1174,20 @@ body {
     z-index: 5;
 }
 
-.day-section.hidden, 
+.day-section.hidden,
 .hidden {
     display: none !important;
 }
 
 /* Styling for the Start Kiss Button specifically */
 #start-kiss-btn {
-    padding: 20px 50px;       /* Makes the button much larger */
-    font-size: 1.6rem;         /* Increases text size */
+    padding: 20px 50px;
+    /* Makes the button much larger */
+    font-size: 1.6rem;
+    /* Increases text size */
     font-weight: bold;
-    border-radius: 50px;      /* Keeps it rounded and cute */
+    border-radius: 50px;
+    /* Keeps it rounded and cute */
     margin-top: 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     background: linear-gradient(135deg, #ff4d6d 0%, #ff758f 100%);
@@ -1181,6 +1195,288 @@ body {
 }
 
 #start-kiss-btn:hover {
-    transform: translateY(-5px) scale(1.05); /* Slight pop effect on hover */
+    transform: translateY(-5px) scale(1.05);
+    /* Slight pop effect on hover */
     box-shadow: 0 15px 30px rgba(255, 77, 109, 0.5);
+}
+
+
+#maze-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#maze-board {
+    /* 10x10 Grid */
+    display: grid;
+    grid-template-columns: repeat(10, 45px);
+    grid-template-rows: repeat(10, 45px);
+    gap: 3px;
+    background: #1e293b;
+    padding: 12px;
+    border-radius: 15px;
+    border: 5px solid #ff4d6d;
+    margin: 20px 0;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.maze-cell {
+    width: 45px;
+    height: 45px;
+    background: #f1f5f9;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.maze-cell.wall {
+    background: #334155;
+    /* Dark walls */
+    background-image: radial-gradient(#475569 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+/* Blocked path */
+.maze-cell.path {
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+    cursor: pointer;
+}
+
+.maze-cell.task {
+    background: #ffe4e6;
+    color: #ff4d6d;
+}
+
+/* Task Node */
+.maze-cell.active {
+    background: #ffccd5;
+    border: 2px solid #ff4d6d;
+}
+
+.sejal-node::after {
+    font-size: 1.8rem;
+}
+
+
+/* #maze-board .sejal-node::after {
+    content: '👧';
+}
+
+
+#maze-board .me-node::after {
+    content: '🏠';
+}
+
+#maze-board .task-node::after {
+    content: '🎁';
+} */
+
+/* Modal Styling */
+#maze-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 90%;
+    /* Takes up most of the width on mobile */
+    /* CHANGE: Increased from 400px to 500px for a bigger presence */
+    max-width: 500px;
+    /* Optional: Add a slight bounce animation for a more polished feel */
+    animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    0% {
+        transform: translate(-50%, -60%) scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+#maze-modal h2 {
+    color: #475569;
+    /* Dark slate blue for high contrast and readability */
+    margin-bottom: 20px;
+    font-size: 2rem;
+    /* Make the question feel important */
+}
+
+.modal-image-container {
+    width: 100%;
+    /* CHANGE: Increased from 200px to 300px to show more detail */
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modal-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures the photo fills the space beautifully */
+}
+
+#city-guess {
+    padding: 12px;
+    border-radius: 25px;
+    border: 2px solid #eee;
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.1rem;
+    transition: border-color 0.3s;
+}
+
+#city-guess:focus {
+    outline: none;
+    border-color: #ff4d6d;
+    /* Highlight border on focus */
+}
+
+.shake {
+    animation: shakeAnim 0.4s ease-in-out;
+}
+
+@keyframes shakeAnim {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%);
+    }
+
+    25% {
+        transform: translate(-55%, -50%);
+    }
+
+    75% {
+        transform: translate(-45%, -50%);
+    }
+}
+
+.sejal-node {
+    z-index: 10;
+    filter: drop-shadow(0 0 5px #ff4d6d);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- CELEBRATION ANIMATION --- */
+
+/* --- ENHANCED CELEBRATION SCREEN --- */
+
+#modal-celebration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    z-index: 999;
+
+    /* THE FIX: Remove the solid gradient, use the same glass effect as the card */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    /* Adds that nice frosted glass look */
+
+    text-align: center;
+}
+
+.yay-text {
+    font-family: 'Dancing Script', cursive;
+    /* CHANGE: Darker pink/red so it's readable on the light glass background */
+    color: #ff4d6d !important;
+    font-size: 3rem !important;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    animation: celebrateBounce 0.5s infinite alternate;
+}
+
+.heart-burst {
+    font-size: 6rem;
+    /* Added a slight shadow to the heart to make it look '3D' on the glass */
+    filter: drop-shadow(0 5px 15px rgba(255, 77, 109, 0.3));
+    animation: heartPop 0.6s ease-out infinite alternate;
+}
+
+/* Ensure 'hidden' works even against 'display: flex' */
+#modal-celebration.hidden {
+    display: none !important;
+}
+
+@keyframes celebrateBounce {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes heartPop {
+    0% {
+        transform: scale(0.8);
+    }
+
+    100% {
+        transform: scale(1.3);
+    }
+}
+
+/* Styling for the central Hug Day success screen */
+#hug-success-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    background: radial-gradient(circle, #fff1f2 0%, #ffdee2 100%);
+}
+
+#hug-success-card {
+    text-align: center;
+    padding: 50px;
+    max-width: 500px;
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#hug-success-card.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.yay-text {
+    font-family: 'Dancing Script', cursive;
+    color: #ff4d6d;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.romantic-message {
+    font-size: 1.2rem;
+    color: #4a5568;
+    line-height: 1.8;
 }

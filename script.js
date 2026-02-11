@@ -25,8 +25,8 @@ const DAILY_MEMORIES = {
         right: [{ src: 'image17.jpg', cap: 'Apratim ❤️' }, { src: 'image18.jpg', cap: 'Special Day ❤️' }]
     },
     12: {
-        left: [{ src: 'image15.jpg', cap: 'Slayyyy' }, { src: 'image16.jpg', cap: 'Love youuu' }],
-        right: [{ src: 'image17.jpg', cap: 'Apratim ❤️' }, { src: 'image18.jpg', cap: 'Special Day ❤️' }]
+        left: [{ src: 'image23.jpg', cap: 'Prasej Forever' }, { src: 'image24.jpg', cap: 'We are HOTTT!!!' }],
+        right: [{ src: 'image25.jpg', cap: 'Cutiess forever ❤️' }, { src: 'image26.jpg', cap: 'A special ferry ride ❤️' }]
     },
     13: {
         left: [{ src: 'image19.jpg', cap: 'Sweet Kisses, Umuaahhh' }, { src: 'image20.jpg', cap: 'I Love You Infiniteee' }],
@@ -37,7 +37,10 @@ const DAILY_MEMORIES = {
 
 function showSuccessPhotos(day) {
     const memories = DAILY_MEMORIES[day];
-    if (!memories) return;
+    if (!memories) {
+        console.error("No memories found for day", day);
+        return;
+    }
 
     const leftContainer = document.getElementById('left-photos');
     const rightContainer = document.getElementById('right-photos');
