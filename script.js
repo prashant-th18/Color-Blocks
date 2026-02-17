@@ -32,6 +32,16 @@ const DAILY_MEMORIES = {
         left: [{ src: 'image19.jpg', cap: 'Sweet Kisses, Umuaahhh' }, { src: 'image20.jpg', cap: 'I Love You Infiniteee' }],
         right: [{ src: 'image21.jpg', cap: 'We the bestestt!!' }, { src: 'image22.jpg', cap: 'Ohh myy myyy ❤️' }]
     },
+    14: {
+        left: [
+            { src: 'image28.jpg', cap: 'We are soooo cutteee toogeetherrr' },
+            { src: 'image29.jpg', cap: 'Awwwwww, I LOVEEE YOUUUU' }
+        ],
+        right: [
+            { src: 'image30.jpg', cap: 'We are the best!' },
+            { src: 'image31.jpg', cap: 'Forever and always ❤️' }
+        ]
+    }
 
 };
 
@@ -125,6 +135,7 @@ function showDay(dayNumber) {
         if (dayNumber === 11) initPromiseDay();
         if (dayNumber === 12) initHugDay();
         if (dayNumber === 13) initKissDay();
+        if (dayNumber === 14) initValentineDay();
     }
 }
 
